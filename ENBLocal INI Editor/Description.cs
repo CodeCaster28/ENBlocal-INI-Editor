@@ -1,0 +1,19 @@
+﻿namespace enboost
+{
+	public enum Description {
+		PROXY,
+		GLOBAL,
+		MEMORY,
+		PERFORMANCE,
+		THREADS,
+		MULTIHEAD,
+		WINDOW,
+		ENGINE,
+		LIMITER,
+		INPUT,
+		ADAPTIVEQUALITY,
+		ANTIALIASING,
+		FIX,
+		LONGEXPOSURE
+	}
+}
