@@ -49,6 +49,10 @@ namespace enboost {
 			ToggleAdvancedMode();
 		}
 
+		private void suppressWarningsToolStripMenuItem_Click(object sender, EventArgs e) {
+			ToggleSuppressWarnings();
+		}
+
 		private void l_lockDescription (object sender, EventArgs e) {
 			lockDescription = lockDescription == false ? true : false;
 			ShowDescription(sender);
@@ -93,5 +97,7 @@ namespace enboost {
 			Form form = new About();
 			form.ShowDialog(this);
 		}
+
+
 	}
 }

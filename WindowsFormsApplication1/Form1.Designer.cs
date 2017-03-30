@@ -84,7 +84,6 @@
 			this.tabPage4 = new System.Windows.Forms.TabPage();
 			this.label8 = new System.Windows.Forms.Label();
 			this.b_DesiredFPS = new System.Windows.Forms.TextBox();
-			this.b_Quality = new System.Windows.Forms.TextBox();
 			this.b_FPSLimit = new System.Windows.Forms.TextBox();
 			this.b_Enable = new System.Windows.Forms.Button();
 			this.b_WaitBusyRenderer = new System.Windows.Forms.Button();
@@ -104,7 +103,6 @@
 			this.tabPage5 = new System.Windows.Forms.TabPage();
 			this.b_LodBias = new System.Windows.Forms.TextBox();
 			this.b_MaxAnisotropy = new System.Windows.Forms.TextBox();
-			this.b_VSyncSkipNumFrames = new System.Windows.Forms.TextBox();
 			this.l_VSyncSkipNumFrames = new System.Windows.Forms.Label();
 			this.b_ForceLodBias = new System.Windows.Forms.Button();
 			this.b_ForceAnisotropicFiltering = new System.Windows.Forms.Button();
@@ -208,6 +206,10 @@
 			this.aboutENBlocalINIEditorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolTipSave = new System.Windows.Forms.ToolTip(this.components);
 			this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+			this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+			this.suppressWarningsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.b_Quality = new System.Windows.Forms.ComboBox();
+			this.b_VSyncSkipNumFrames = new System.Windows.Forms.ComboBox();
 			this.tabsIn.SuspendLayout();
 			this.tabPage1.SuspendLayout();
 			this.tabPage2.SuspendLayout();
@@ -988,9 +990,9 @@
 			// 
 			// tabPage4
 			// 
+			this.tabPage4.Controls.Add(this.b_Quality);
 			this.tabPage4.Controls.Add(this.label8);
 			this.tabPage4.Controls.Add(this.b_DesiredFPS);
-			this.tabPage4.Controls.Add(this.b_Quality);
 			this.tabPage4.Controls.Add(this.b_FPSLimit);
 			this.tabPage4.Controls.Add(this.b_Enable);
 			this.tabPage4.Controls.Add(this.b_WaitBusyRenderer);
@@ -1037,17 +1039,6 @@
 			this.b_DesiredFPS.TabIndex = 43;
 			this.b_DesiredFPS.Tag = "";
 			this.b_DesiredFPS.TextChanged += new System.EventHandler(this.b_TextChanged);
-			// 
-			// b_Quality
-			// 
-			this.b_Quality.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-			this.b_Quality.Location = new System.Drawing.Point(236, 288);
-			this.b_Quality.Margin = new System.Windows.Forms.Padding(2);
-			this.b_Quality.Name = "b_Quality";
-			this.b_Quality.Size = new System.Drawing.Size(77, 21);
-			this.b_Quality.TabIndex = 43;
-			this.b_Quality.Tag = "";
-			this.b_Quality.TextChanged += new System.EventHandler(this.b_TextChanged);
 			// 
 			// b_FPSLimit
 			// 
@@ -1251,9 +1242,9 @@
 			// 
 			// tabPage5
 			// 
+			this.tabPage5.Controls.Add(this.b_VSyncSkipNumFrames);
 			this.tabPage5.Controls.Add(this.b_LodBias);
 			this.tabPage5.Controls.Add(this.b_MaxAnisotropy);
-			this.tabPage5.Controls.Add(this.b_VSyncSkipNumFrames);
 			this.tabPage5.Controls.Add(this.l_VSyncSkipNumFrames);
 			this.tabPage5.Controls.Add(this.b_ForceLodBias);
 			this.tabPage5.Controls.Add(this.b_ForceAnisotropicFiltering);
@@ -1296,17 +1287,6 @@
 			this.b_MaxAnisotropy.TabIndex = 43;
 			this.b_MaxAnisotropy.Tag = "";
 			this.b_MaxAnisotropy.TextChanged += new System.EventHandler(this.b_TextChanged);
-			// 
-			// b_VSyncSkipNumFrames
-			// 
-			this.b_VSyncSkipNumFrames.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-			this.b_VSyncSkipNumFrames.Location = new System.Drawing.Point(236, 209);
-			this.b_VSyncSkipNumFrames.Margin = new System.Windows.Forms.Padding(2);
-			this.b_VSyncSkipNumFrames.Name = "b_VSyncSkipNumFrames";
-			this.b_VSyncSkipNumFrames.Size = new System.Drawing.Size(77, 21);
-			this.b_VSyncSkipNumFrames.TabIndex = 44;
-			this.b_VSyncSkipNumFrames.Tag = "";
-			this.b_VSyncSkipNumFrames.TextChanged += new System.EventHandler(this.b_TextChanged);
 			// 
 			// l_VSyncSkipNumFrames
 			// 
@@ -2552,7 +2532,8 @@
 			// modeToolStripMenuItem
 			// 
 			this.modeToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.advancedModeToolStripMenuItem});
+            this.advancedModeToolStripMenuItem,
+            this.suppressWarningsToolStripMenuItem});
 			this.modeToolStripMenuItem.Name = "modeToolStripMenuItem";
 			this.modeToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
 			this.modeToolStripMenuItem.Text = "Mode";
@@ -2560,7 +2541,7 @@
 			// advancedModeToolStripMenuItem
 			// 
 			this.advancedModeToolStripMenuItem.Name = "advancedModeToolStripMenuItem";
-			this.advancedModeToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
+			this.advancedModeToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
 			this.advancedModeToolStripMenuItem.Text = "Advanced Mode";
 			this.advancedModeToolStripMenuItem.Click += new System.EventHandler(this.advancedModeButton_Click);
 			// 
@@ -2583,6 +2564,44 @@
 			// 
 			this.openFileDialog1.FileName = "openFileDialog1";
 			this.openFileDialog1.Filter = "INI files|*.ini";
+			// 
+			// suppressWarningsToolStripMenuItem
+			// 
+			this.suppressWarningsToolStripMenuItem.Name = "suppressWarningsToolStripMenuItem";
+			this.suppressWarningsToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
+			this.suppressWarningsToolStripMenuItem.Text = "Suppress Warnings";
+			this.suppressWarningsToolStripMenuItem.Click += new System.EventHandler(this.suppressWarningsToolStripMenuItem_Click);
+			// 
+			// b_Quality
+			// 
+			this.b_Quality.FormattingEnabled = true;
+			this.b_Quality.Items.AddRange(new object[] {
+            "0",
+            "1",
+            "2"});
+			this.b_Quality.Location = new System.Drawing.Point(235, 287);
+			this.b_Quality.Margin = new System.Windows.Forms.Padding(2);
+			this.b_Quality.Name = "b_Quality";
+			this.b_Quality.Size = new System.Drawing.Size(77, 21);
+			this.b_Quality.Sorted = true;
+			this.b_Quality.TabIndex = 45;
+			this.b_Quality.TextChanged += new System.EventHandler(this.b_TextChanged);
+			// 
+			// b_VSyncSkipNumFrames
+			// 
+			this.b_VSyncSkipNumFrames.FormattingEnabled = true;
+			this.b_VSyncSkipNumFrames.Items.AddRange(new object[] {
+            "0",
+            "1",
+            "2",
+            "3"});
+			this.b_VSyncSkipNumFrames.Location = new System.Drawing.Point(236, 210);
+			this.b_VSyncSkipNumFrames.Margin = new System.Windows.Forms.Padding(2);
+			this.b_VSyncSkipNumFrames.Name = "b_VSyncSkipNumFrames";
+			this.b_VSyncSkipNumFrames.Size = new System.Drawing.Size(77, 21);
+			this.b_VSyncSkipNumFrames.Sorted = true;
+			this.b_VSyncSkipNumFrames.TabIndex = 55;
+			this.b_VSyncSkipNumFrames.TextChanged += new System.EventHandler(this.b_TextChanged);
 			// 
 			// Form1
 			// 
@@ -2692,7 +2711,6 @@
         private System.Windows.Forms.TabPage tabPage4;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox b_DesiredFPS;
-        private System.Windows.Forms.TextBox b_Quality;
         private System.Windows.Forms.TextBox b_FPSLimit;
         private System.Windows.Forms.Button b_Enable;
         private System.Windows.Forms.Button b_WaitBusyRenderer;
@@ -2712,7 +2730,6 @@
         private System.Windows.Forms.TabPage tabPage5;
         private System.Windows.Forms.TextBox b_LodBias;
         private System.Windows.Forms.TextBox b_MaxAnisotropy;
-        private System.Windows.Forms.TextBox b_VSyncSkipNumFrames;
         private System.Windows.Forms.Label l_VSyncSkipNumFrames;
         private System.Windows.Forms.Button b_ForceLodBias;
         private System.Windows.Forms.Button b_ForceAnisotropicFiltering;
@@ -2810,6 +2827,10 @@
         private System.Windows.Forms.ToolStripMenuItem aboutENBlocalINIEditorToolStripMenuItem;
         private System.Windows.Forms.ComboBox b_DataSyncMode;
         private System.Windows.Forms.ComboBox b_PriorityMode;
-    }
+		private System.Windows.Forms.ToolTip toolTip1;
+		private System.Windows.Forms.ToolStripMenuItem suppressWarningsToolStripMenuItem;
+		private System.Windows.Forms.ComboBox b_Quality;
+		private System.Windows.Forms.ComboBox b_VSyncSkipNumFrames;
+	}
 }
 

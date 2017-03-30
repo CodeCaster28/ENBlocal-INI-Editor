@@ -16,6 +16,7 @@ namespace enboost {
 		short memoryValue = 0;
 		public bool lockDescription;
 		public bool advancedMode;
+		public bool suppressWarnings;
 		bool lockSaving;
 		bool freshStart = true;
 
@@ -38,6 +39,7 @@ namespace enboost {
 				messageResult = MessageBox.Show("Do you want to load a new File? Unsaved changes will be lost.", "Confirm Reload", MessageBoxButtons.YesNo);
 			if (messageResult == DialogResult.Yes) {
 				advancedMode = false;
+				suppressWarnings = false;
 				lockSaving = false;
 				lockDescription = false;
 				advancedModeToolStripMenuItem.Checked = false;
@@ -156,6 +158,19 @@ namespace enboost {
 			}
 		}
 
+		private void ToggleSuppressWarnings() {
+			if (suppressWarnings == false) {
+				suppressWarnings = true;
+				suppressWarningsToolStripMenuItem.Checked = true;
+				ValidateAll();
+			}
+			else {
+				suppressWarnings = false;
+				suppressWarningsToolStripMenuItem.Checked = false;
+				ValidateAll();
+			}
+		}
+
 		private void EnableAllOptions (Control[] tabPages) {
 			for (int i = 0; i < tabPages.Length; i++) {
 				foreach (Control control in tabPages[i].Controls) {
@@ -167,9 +182,12 @@ namespace enboost {
 
 		private void ValidateAll () {
 			lockSaving = false;
-			ValidateTextboxes();
-			ValidateButton();
-			ValidateCombos();
+				ValidateTextboxes();
+				ValidateButton();
+				ValidateCombos();
+				ValidateSpecial();
+			if (suppressWarnings == true)
+				lockSaving = false;
 			if (lockSaving == true) {
 				saveEnblocaliniToolStripMenuItem.ForeColor = Color.Gray;
 			}
@@ -224,21 +242,34 @@ namespace enboost {
 			}
 		}
 
-		private void ValidateCombos()
-		{
+		private void ValidateCombos() {
 			for (int i = 0; i < allTabs.Length; i++) {
 				foreach (Control control in allTabs[i].Controls) {
 					if (control is ComboBox combobox) {
-						if (string.IsNullOrEmpty(combobox.Text)) {
-							combobox.BackColor = Color.LightPink;
-							lockSaving = true;
-						}
-						else if(combobox.Items.Contains(combobox.Text) == false){
+						if(combobox.Items.Contains(combobox.Text) == false){
 							combobox.BackColor = Color.LightPink;
 							lockSaving = true;
 						}
 						else
 							combobox.BackColor = SystemColors.Window;
+					}
+				}
+			}
+		}
+
+		private void ValidateSpecial() {
+			for (int i = 0; i < allTabs.Length; i++) {
+				foreach (Control control in allTabs[i].Controls) {
+					if (control.Name == b_ProxyLibrary.Name) {
+						if (control.Text.EndsWith(".dll") == false || control.Text == ".dll") {
+							control.BackColor = Color.LightPink;
+							toolTip1.SetToolTip(control, "Wrong file name, missing .dll extension");
+							lockSaving = true;
+						}
+						else {
+							toolTip1.SetToolTip(control, null);
+							control.BackColor = SystemColors.Window;
+						}
 					}
 				}
 			}
