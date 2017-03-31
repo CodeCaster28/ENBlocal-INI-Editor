@@ -41,7 +41,7 @@
 			this.label1 = new System.Windows.Forms.Label();
 			this.b_EnableProxyLibrary = new System.Windows.Forms.Button();
 			this.tabPage2 = new System.Windows.Forms.TabPage();
-			this.button3 = new System.Windows.Forms.Button();
+			this.button_decrement = new System.Windows.Forms.Button();
 			this.button_increment = new System.Windows.Forms.Button();
 			this.button_linked = new System.Windows.Forms.Button();
 			this.b_ReservedMemorySizeMb = new System.Windows.Forms.TextBox();
@@ -82,6 +82,7 @@
 			this.label5 = new System.Windows.Forms.Label();
 			this.label4 = new System.Windows.Forms.Label();
 			this.tabPage4 = new System.Windows.Forms.TabPage();
+			this.b_Quality = new System.Windows.Forms.ComboBox();
 			this.label8 = new System.Windows.Forms.Label();
 			this.b_DesiredFPS = new System.Windows.Forms.TextBox();
 			this.b_FPSLimit = new System.Windows.Forms.TextBox();
@@ -101,6 +102,7 @@
 			this.label16 = new System.Windows.Forms.Label();
 			this.label17 = new System.Windows.Forms.Label();
 			this.tabPage5 = new System.Windows.Forms.TabPage();
+			this.b_VSyncSkipNumFrames = new System.Windows.Forms.ComboBox();
 			this.b_LodBias = new System.Windows.Forms.TextBox();
 			this.b_MaxAnisotropy = new System.Windows.Forms.TextBox();
 			this.l_VSyncSkipNumFrames = new System.Windows.Forms.Label();
@@ -202,14 +204,14 @@
 			this.saveEnblocaliniToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.modeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.advancedModeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.suppressWarningsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.aboutENBlocalINIEditorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolTipSave = new System.Windows.Forms.ToolTip(this.components);
 			this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
 			this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-			this.suppressWarningsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.b_Quality = new System.Windows.Forms.ComboBox();
-			this.b_VSyncSkipNumFrames = new System.Windows.Forms.ComboBox();
+			this.button_decrement2 = new System.Windows.Forms.Button();
+			this.button_increment2 = new System.Windows.Forms.Button();
 			this.tabsIn.SuspendLayout();
 			this.tabPage1.SuspendLayout();
 			this.tabPage2.SuspendLayout();
@@ -439,7 +441,7 @@
 			// 
 			// tabPage2
 			// 
-			this.tabPage2.Controls.Add(this.button3);
+			this.tabPage2.Controls.Add(this.button_decrement);
 			this.tabPage2.Controls.Add(this.button_increment);
 			this.tabPage2.Controls.Add(this.button_linked);
 			this.tabPage2.Controls.Add(this.b_ReservedMemorySizeMb);
@@ -471,18 +473,18 @@
 			this.tabPage2.UseVisualStyleBackColor = true;
 			this.tabPage2.DoubleClick += new System.EventHandler(this.unlockDescription);
 			// 
-			// button3
+			// button_decrement
 			// 
-			this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-			this.button3.Location = new System.Drawing.Point(236, 182);
-			this.button3.Margin = new System.Windows.Forms.Padding(2);
-			this.button3.Name = "button3";
-			this.button3.Size = new System.Drawing.Size(17, 20);
-			this.button3.TabIndex = 37;
-			this.button3.Text = "-";
-			this.button3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-			this.button3.UseVisualStyleBackColor = true;
-			this.button3.Click += new System.EventHandler(this.buttonDecrement_Click);
+			this.button_decrement.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+			this.button_decrement.Location = new System.Drawing.Point(236, 182);
+			this.button_decrement.Margin = new System.Windows.Forms.Padding(2);
+			this.button_decrement.Name = "button_decrement";
+			this.button_decrement.Size = new System.Drawing.Size(17, 20);
+			this.button_decrement.TabIndex = 37;
+			this.button_decrement.Text = "-";
+			this.button_decrement.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+			this.button_decrement.UseVisualStyleBackColor = true;
+			this.button_decrement.Click += new System.EventHandler(this.buttonDecrement_Click);
 			// 
 			// button_increment
 			// 
@@ -1018,6 +1020,21 @@
 			this.tabPage4.UseVisualStyleBackColor = true;
 			this.tabPage4.DoubleClick += new System.EventHandler(this.unlockDescription);
 			// 
+			// b_Quality
+			// 
+			this.b_Quality.FormattingEnabled = true;
+			this.b_Quality.Items.AddRange(new object[] {
+            "0",
+            "1",
+            "2"});
+			this.b_Quality.Location = new System.Drawing.Point(235, 287);
+			this.b_Quality.Margin = new System.Windows.Forms.Padding(2);
+			this.b_Quality.Name = "b_Quality";
+			this.b_Quality.Size = new System.Drawing.Size(77, 21);
+			this.b_Quality.Sorted = true;
+			this.b_Quality.TabIndex = 45;
+			this.b_Quality.TextChanged += new System.EventHandler(this.b_TextChanged);
+			// 
 			// label8
 			// 
 			this.label8.AutoSize = true;
@@ -1242,6 +1259,8 @@
 			// 
 			// tabPage5
 			// 
+			this.tabPage5.Controls.Add(this.button_decrement2);
+			this.tabPage5.Controls.Add(this.button_increment2);
 			this.tabPage5.Controls.Add(this.b_VSyncSkipNumFrames);
 			this.tabPage5.Controls.Add(this.b_LodBias);
 			this.tabPage5.Controls.Add(this.b_MaxAnisotropy);
@@ -1266,6 +1285,22 @@
 			this.tabPage5.UseVisualStyleBackColor = true;
 			this.tabPage5.DoubleClick += new System.EventHandler(this.unlockDescription);
 			// 
+			// b_VSyncSkipNumFrames
+			// 
+			this.b_VSyncSkipNumFrames.FormattingEnabled = true;
+			this.b_VSyncSkipNumFrames.Items.AddRange(new object[] {
+            "0",
+            "1",
+            "2",
+            "3"});
+			this.b_VSyncSkipNumFrames.Location = new System.Drawing.Point(236, 210);
+			this.b_VSyncSkipNumFrames.Margin = new System.Windows.Forms.Padding(2);
+			this.b_VSyncSkipNumFrames.Name = "b_VSyncSkipNumFrames";
+			this.b_VSyncSkipNumFrames.Size = new System.Drawing.Size(77, 21);
+			this.b_VSyncSkipNumFrames.Sorted = true;
+			this.b_VSyncSkipNumFrames.TabIndex = 55;
+			this.b_VSyncSkipNumFrames.TextChanged += new System.EventHandler(this.b_TextChanged);
+			// 
 			// b_LodBias
 			// 
 			this.b_LodBias.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
@@ -1280,10 +1315,10 @@
 			// b_MaxAnisotropy
 			// 
 			this.b_MaxAnisotropy.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-			this.b_MaxAnisotropy.Location = new System.Drawing.Point(236, 75);
+			this.b_MaxAnisotropy.Location = new System.Drawing.Point(254, 73);
 			this.b_MaxAnisotropy.Margin = new System.Windows.Forms.Padding(2);
 			this.b_MaxAnisotropy.Name = "b_MaxAnisotropy";
-			this.b_MaxAnisotropy.Size = new System.Drawing.Size(77, 21);
+			this.b_MaxAnisotropy.Size = new System.Drawing.Size(41, 21);
 			this.b_MaxAnisotropy.TabIndex = 43;
 			this.b_MaxAnisotropy.Tag = "";
 			this.b_MaxAnisotropy.TextChanged += new System.EventHandler(this.b_TextChanged);
@@ -2545,6 +2580,13 @@
 			this.advancedModeToolStripMenuItem.Text = "Advanced Mode";
 			this.advancedModeToolStripMenuItem.Click += new System.EventHandler(this.advancedModeButton_Click);
 			// 
+			// suppressWarningsToolStripMenuItem
+			// 
+			this.suppressWarningsToolStripMenuItem.Name = "suppressWarningsToolStripMenuItem";
+			this.suppressWarningsToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
+			this.suppressWarningsToolStripMenuItem.Text = "Suppress Warnings";
+			this.suppressWarningsToolStripMenuItem.Click += new System.EventHandler(this.suppressWarningsToolStripMenuItem_Click);
+			// 
 			// aboutToolStripMenuItem
 			// 
 			this.aboutToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -2565,43 +2607,30 @@
 			this.openFileDialog1.FileName = "openFileDialog1";
 			this.openFileDialog1.Filter = "INI files|*.ini";
 			// 
-			// suppressWarningsToolStripMenuItem
+			// button_decrement2
 			// 
-			this.suppressWarningsToolStripMenuItem.Name = "suppressWarningsToolStripMenuItem";
-			this.suppressWarningsToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
-			this.suppressWarningsToolStripMenuItem.Text = "Suppress Warnings";
-			this.suppressWarningsToolStripMenuItem.Click += new System.EventHandler(this.suppressWarningsToolStripMenuItem_Click);
+			this.button_decrement2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+			this.button_decrement2.Location = new System.Drawing.Point(237, 74);
+			this.button_decrement2.Margin = new System.Windows.Forms.Padding(2);
+			this.button_decrement2.Name = "button_decrement2";
+			this.button_decrement2.Size = new System.Drawing.Size(17, 20);
+			this.button_decrement2.TabIndex = 57;
+			this.button_decrement2.Text = "-";
+			this.button_decrement2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+			this.button_decrement2.UseVisualStyleBackColor = true;
+			this.button_decrement2.Click += new System.EventHandler(this.button_decrement2_Click);
 			// 
-			// b_Quality
+			// button_increment2
 			// 
-			this.b_Quality.FormattingEnabled = true;
-			this.b_Quality.Items.AddRange(new object[] {
-            "0",
-            "1",
-            "2"});
-			this.b_Quality.Location = new System.Drawing.Point(235, 287);
-			this.b_Quality.Margin = new System.Windows.Forms.Padding(2);
-			this.b_Quality.Name = "b_Quality";
-			this.b_Quality.Size = new System.Drawing.Size(77, 21);
-			this.b_Quality.Sorted = true;
-			this.b_Quality.TabIndex = 45;
-			this.b_Quality.TextChanged += new System.EventHandler(this.b_TextChanged);
-			// 
-			// b_VSyncSkipNumFrames
-			// 
-			this.b_VSyncSkipNumFrames.FormattingEnabled = true;
-			this.b_VSyncSkipNumFrames.Items.AddRange(new object[] {
-            "0",
-            "1",
-            "2",
-            "3"});
-			this.b_VSyncSkipNumFrames.Location = new System.Drawing.Point(236, 210);
-			this.b_VSyncSkipNumFrames.Margin = new System.Windows.Forms.Padding(2);
-			this.b_VSyncSkipNumFrames.Name = "b_VSyncSkipNumFrames";
-			this.b_VSyncSkipNumFrames.Size = new System.Drawing.Size(77, 21);
-			this.b_VSyncSkipNumFrames.Sorted = true;
-			this.b_VSyncSkipNumFrames.TabIndex = 55;
-			this.b_VSyncSkipNumFrames.TextChanged += new System.EventHandler(this.b_TextChanged);
+			this.button_increment2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+			this.button_increment2.Location = new System.Drawing.Point(295, 74);
+			this.button_increment2.Margin = new System.Windows.Forms.Padding(2);
+			this.button_increment2.Name = "button_increment2";
+			this.button_increment2.Size = new System.Drawing.Size(17, 20);
+			this.button_increment2.TabIndex = 56;
+			this.button_increment2.Text = "+";
+			this.button_increment2.UseVisualStyleBackColor = true;
+			this.button_increment2.Click += new System.EventHandler(this.button_increment2_Click);
 			// 
 			// Form1
 			// 
@@ -2683,7 +2712,7 @@
         private System.Windows.Forms.Button b_DisablePreloadToVRAM;
         private System.Windows.Forms.Button b_EnableUnsafeMemoryHacks;
         private System.Windows.Forms.Button button_linked;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button_decrement;
         private System.Windows.Forms.Button button_increment;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
@@ -2831,6 +2860,8 @@
 		private System.Windows.Forms.ToolStripMenuItem suppressWarningsToolStripMenuItem;
 		private System.Windows.Forms.ComboBox b_Quality;
 		private System.Windows.Forms.ComboBox b_VSyncSkipNumFrames;
+		private System.Windows.Forms.Button button_decrement2;
+		private System.Windows.Forms.Button button_increment2;
 	}
 }
 

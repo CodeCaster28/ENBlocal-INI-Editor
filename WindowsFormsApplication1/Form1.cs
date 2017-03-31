@@ -11,7 +11,7 @@ using System.Management;
 
 namespace enboost {
 	public partial class Form1:Form {
-		// TODO: Block user from typing illegal values when in standard mode.
+		// TODO: Add support for SSAWaterTransparencyFix
 		public Form1 () {
 			InitializeComponent();
 			PickAllTabs();
@@ -98,6 +98,12 @@ namespace enboost {
 			form.ShowDialog(this);
 		}
 
+		private void button_decrement2_Click(object sender, EventArgs e) {
+			DecrementAnizotropyValue();
+		}
 
+		private void button_increment2_Click(object sender, EventArgs e) {
+			IncrementAnizotropyValue();
+		}
 	}
 }

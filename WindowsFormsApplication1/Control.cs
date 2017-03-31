@@ -9,11 +9,13 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Management;
 using System.IO;
+using System.Text.RegularExpressions;
 
 namespace enboost {
 	public partial class Form1:Form {
 
 		short memoryValue = 0;
+		short anizotropyValue = 0;
 		public bool lockDescription;
 		public bool advancedMode;
 		public bool suppressWarnings;
@@ -106,6 +108,7 @@ namespace enboost {
 
 		private void SetRestrictedVars () {
 			memoryValue = short.Parse(b_ReservedMemorySizeMb.Text);
+			anizotropyValue = short.Parse(b_MaxAnisotropy.Text);
 		}
 
 		private void ToggleButton (object sender) {
@@ -143,6 +146,20 @@ namespace enboost {
 				memoryValue -= memoryValue.Equals(128) ? (short)64 : (short)128;
 				b_ReservedMemorySizeMb.Text = memoryValue.ToString();
 			}
+		}
+
+		private void DecrementAnizotropyValue() {
+			if (anizotropyValue > 2) {
+				anizotropyValue -= 2;
+				b_MaxAnisotropy.Text = anizotropyValue.ToString();
+			}
+		}
+
+		private void IncrementAnizotropyValue() {
+			if (anizotropyValue < 16) {
+				anizotropyValue += 2;
+			}
+			b_MaxAnisotropy.Text = anizotropyValue.ToString();
 		}
 
 		private void ToggleAdvancedMode () {
@@ -261,7 +278,7 @@ namespace enboost {
 			for (int i = 0; i < allTabs.Length; i++) {
 				foreach (Control control in allTabs[i].Controls) {
 					if (control.Name == b_ProxyLibrary.Name) {
-						if (control.Text.EndsWith(".dll") == false || control.Text == ".dll") {
+						if (b_EnableProxyLibrary.Text == "true" && (control.Text.EndsWith(".dll") == false || control.Text == ".dll")) {
 							control.BackColor = Color.LightPink;
 							toolTip1.SetToolTip(control, "Wrong file name, missing .dll extension");
 							lockSaving = true;
@@ -270,6 +287,30 @@ namespace enboost {
 							toolTip1.SetToolTip(control, null);
 							control.BackColor = SystemColors.Window;
 						}
+					}
+					if (control == b_ReservedMemorySizeMb || control == b_VideoMemorySizeMb || control == b_VideoAdapterIndex) {
+						if (Regex.IsMatch(control.Text, @"^\d+$") == false) {
+							control.BackColor = Color.LightPink;
+							lockSaving = true;
+						}
+						else
+							control.BackColor = SystemColors.Window;
+					}
+					if(control == b_FPSLimit || control == b_DesiredFPS) {
+						if(Regex.IsMatch(control.Text, @"^\d+(\.)?\d+$") == false && Regex.IsMatch(control.Text, @"^\d+$") == false) {
+							control.BackColor = Color.LightPink;
+							lockSaving = true;
+						}
+						else
+							control.BackColor = SystemColors.Window;
+					}
+					if (control == b_LodBias) {
+						if (Regex.IsMatch(control.Text, @"^(-)?\d+(\.)?\d+$") == false && Regex.IsMatch(control.Text, @"^(-)?\d+$") == false) {
+							control.BackColor = Color.LightPink;
+							lockSaving = true;
+						}
+						else
+							control.BackColor = SystemColors.Window;
 					}
 				}
 			}
@@ -355,7 +396,7 @@ namespace enboost {
 					string errorInfo = "\n";
 					for (int i = 0; i < invalidLinesRef.Count; i++)
 						errorInfo += invalidLinesRef[i] + "\n";
-					messageResult = MessageBox.Show("Loaded file contains invalid lines at:" + errorInfo, "File Contains Errors", MessageBoxButtons.OK, MessageBoxIcon.Error);
+					messageResult = MessageBox.Show("Loaded file contains invalid or unrecognized lines at:" + errorInfo, "File Contains Errors", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 				}
 			}
 		}
